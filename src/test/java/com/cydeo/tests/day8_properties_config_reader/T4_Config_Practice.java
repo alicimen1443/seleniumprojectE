@@ -26,18 +26,18 @@ public class T4_Config_Practice {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //1. Go to:https://google.com
-        driver.get("https://www.google.com");
+        driver.get("https://google.com");
     }
 
     @Test
     public void google_search_test(){
         //3- Write “apple” in search box
         WebElement googleSearchBox = driver.findElement(By.xpath("//input[@name='q']"));
-        googleSearchBox.sendKeys("apple"+ Keys.ENTER);
+        googleSearchBox.sendKeys(ConfigurationReader.getProperty("searchValue")+ Keys.ENTER);
 
         //4- Verify title:
         //Expected: apple-Google Search
-        String expectedTitle = "apple - Google'da Ara";
+        String expectedTitle = ConfigurationReader.getProperty("searchValue")+" - Google'da Ara";
         String actualTitle= driver.getTitle();
 
         Assert.assertEquals(actualTitle,expectedTitle);
